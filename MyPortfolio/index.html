@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopEasy India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+   
+    /* Default (Light) Theme */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 20px;
+    }
+
+    /* Hidden checkbox */
+    #dark-toggle {
+      display: none;
+    }
+
+    /* Button styled label */
+    .toggle-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #000;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode Variables when checked */
+    #dark-toggle:checked ~ * {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+    }
+
+    /* Optional: Change button color in dark mode */
+    #dark-toggle:checked + label.toggle-button {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .product-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      display: inline-block;
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div id="product-list"></div>
+
+  <script>
+    const container = document.getElementById("product-list");
+    const products = JSON.parse(localStorage.getItem("products") || "[]");
+
+    if (products.length === 0) {
+      container.innerHTML = "";
+    } else {
+      products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>Price: $${parseFloat(product.price).toFixed(2)}</p>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+  </script>
+
+  <header>
+    <div class="logo">ShopEasy</div>
+    <form class="searchform" id="searchForm">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+    </form>
+    <input type="checkbox" id="nav-checkbox" hidden>
+    <label for="nav-checkbox" class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-links">
+      <a href="#">Home</a>
+       
+      <div>
+        <a href="#">Categories ▾</a>
+        <div class="dropdown-content">
+          <a href="#">Men's Fashion</a>
+          <a href="#">Women's Fashion</a>
+          <a href="#">Electronics</a>
+          <a href="#">Home & Kitchen</a>
+          <a href="#">Beauty</a>
+          <a href="#">Gadgets</a>
+        </div>
+      </div>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Discover the Latest Indian Trends</h1>
+    <p>Shop premium products at unbeatable prices</p>
+    <a href="#">Start Shopping</a>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img class = "imge"src="shirt 1.webp" alt="Sneakers">
+        <div class="product-content">
+          <h3>Stylish Sneakers</h3>
+          <p>Comfortable and trendy for everyday wear.</p>
+          <span class="price">₹2,499</span>
+        </div>
+      </div>
+      <div class="product">
+        <img class = "imge" src="headphones 1.webp" alt="Headphones">
+        <div class="product-content">
+          <h3>Wireless Headphones</h3>
+          <p>Experience high-quality sound without wires.</p>
+          <span class="price">₹3,999</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Electronics -->
+  <section class="section">
+    <h2>Electronics</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img class = "imge" src="smartphone 1.webp" alt="Phone">
+        <div class="product-content">
+          <h3>Latest Smartphone</h3>
+          <p>High performance at affordable prices.</p>
+          <span class="price">₹14,999</span>
+        </div>
+      </div>
+      <div class="product">
+        <img class = "imge" src="laptop 1.avif" alt="Laptop">
+        <div class="product-content">
+          <h3>Lightweight Laptop</h3>
+          <p>Perfect for students and professionals.</p>
+          <span class="price">₹39,999</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fashion -->
+  <section class="section">
+    <h2>Men's Fashion</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img class = "imge" src="shirt 1.webp" alt="Shirt">
+        <div class="product-content">
+          <h3>Casual Shirt</h3>
+          <p>Comfortable & stylish daily wear.</p>
+          <span class="price">₹799</span>
+        </div>
+      </div>
+      <div class="product">
+        <img class = "imge" src="jeans 1.avif" alt="Jeans">
+        <div class="product-content">
+          <h3>Denim Jeans</h3>
+          <p>Premium quality, perfect fit.</p>
+          <span class="price">₹1,199</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero">
+   <a href="add-product.html">Add Product</a>
+  </section>
+
+  <footer>
+    &copy; 2025 ShopEasy India. All rights reserved.
+  </footer>
+ </label>
+ </div> 
+</body>
+</html>
+
